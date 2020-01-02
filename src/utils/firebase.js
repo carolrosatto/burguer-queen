@@ -1,4 +1,4 @@
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 import 'firebase/firestore'
 
 const firebaseConfig = {
@@ -11,10 +11,10 @@ const firebaseConfig = {
     appId: "1:827640518224:web:3c3f793d2fe102dddbe355"
   };
   
-  const firebaseCon = firebase.initializeApp(firebaseConfig);
+  firebase.initializeApp(firebaseConfig);
  
   const db = firebase.firestore();
 
   export { db };
 
-  export default firebaseCon;
+  export default firebase;
