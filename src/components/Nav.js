@@ -1,6 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import { StyleSheet, css } from 'aphrodite';
+import Input from '../components/Input';
 
 function Nav() {
   return (
@@ -16,13 +17,27 @@ function Nav() {
 const styles = StyleSheet.create({
   nav: {
     backgroundColor: '#D95204',
-    height: '40px', 
+    width: '99vw',
+    height: '5vh',
+    display: 'flex',
+    justifyContent: 'space-around',
+    alignItems: 'center'
   },
-  //Como estilizar o Link? Não funciona pq na real ele é um <a> e não um botão
+
   navbtn: {
     backgroundColor: '#84BF04',
-    margin: '30px',
-
+    borderRadius: '5px',
+    width: '9vw',
+    height: '2vh',
+    padding: '5px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    textDecoration: 'none',
+    fontFamily: 'Lato, sans-serif',
+    fontSize: '90%',
+    color: '#000000',
+    fontWeight: 'bold'
   }
 })
 

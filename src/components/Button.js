@@ -2,11 +2,11 @@ import React from 'react'
 
 function Button (props) {
     return(
-        <section 
-        onClick={props.handleClick} 
+        <button 
+        onClick={props.onClick} 
         className={props.className}>
-          <p>{props.title}</p>
-        </section>
+        {props.title}
+        </button>
     )
 }
 export default Button;

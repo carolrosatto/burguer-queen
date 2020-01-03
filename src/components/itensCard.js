@@ -7,8 +7,8 @@ function ItensCard(props) {
         onClick={props.onClick} 
         className={css(styles.menuCard)} 
         id={props.id}>
-          <p>{props.name}</p>
-          <p>R$ {props.price},00</p>
+          {props.name}<br/>
+          R$ {props.price},00
         </section>
     )
 }
@@ -17,19 +17,18 @@ const styles = StyleSheet.create({
 
   menuCard: {
     backgroundColor: '#F29F05',
-    width: '110px',
-    height: '50px',
+    width: '13vw',
+    height: '5vh',
     borderRadius: '5px',
     fontFamily: 'Lato, sans-serif',
-    fontSize:'80%',
+    fontSize:'90%',
     display: 'flex',
     fontWeight: 'bold',
-    padding: '5px',
+    padding: '10px',
     margin: '5px',
     justifyContent: 'center',
     alignItems: 'center',
   }
-
 })
 
 export default ItensCard;
