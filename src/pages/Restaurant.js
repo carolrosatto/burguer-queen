@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../utils/firebase';
+import firebase from 'firebase/app';
 import { StyleSheet, css } from 'aphrodite';
 import ItensCard from '../components/itensCard';
 import MealTimeCard from '../components/MealTimeCard'
@@ -11,7 +12,7 @@ function Restaurant() {
   const [breakfast, setBreakfast] = useState(true);
   const [client, setClient] = useState('');
   const [table, setTable] = useState('');
-  const [products, setProducts] = useState([]);
+  const [order, setOrder] = useState([]);
 
   useEffect(() => {
     db.collection('Menu')
@@ -30,28 +31,27 @@ function Restaurant() {
     return meal;
   }
 
-  const addProducts = (item) => {
-    setProducts([...products, item]);
-    
-    console.log(products)
-}
+  const addProducts = (menuItem) => {
+    setOrder([...order, menuItem]);
+  }
 
-  // const addOrder = () => {
-  //   db.collection("Order")
-  //     .add({
-  //       clientName: client,
-  //       table: table,
-
-  //     })
-  //     .then(function (docRef) {
-  //       console.log("Funcionou :D", docRef.id);
-  //     })
-  //     .catch(function (error) {
-  //       console.error("Fudeu", error);
-  //     })
-  // };
-
-  // Pra adicionar algo no firebase -> criar uma constante com o que voce ta pegando de informação, no caso o value to texto do input -> // 
+  const sendOrder = () => {
+    db.collection('Order')
+      .add({
+        clientName: client,
+        tableNumber: table,
+        clientOrder: order,
+        // totalBill: total,
+        status: 'Em andamento',
+        time: firebase.firestore.FieldValue.serverTimestamp()
+      })
+      .then(() => {
+        setOrder([]);
+        setTable(['']);
+        setClient(['']);
+      })
+    console.log('Enviado');
+  }
 
   return (
     <main className={css(styles.main)}>
@@ -77,22 +77,24 @@ function Restaurant() {
           {filterMeal().map((menuItem) =>
             <ItensCard key={menuItem.id}
               id={menuItem.id}
-              onClick={addProducts}
+              onClick={() => addProducts}
               name={menuItem.name}
-              price={menuItem.price} />)
-            }
+              price={menuItem.price}
+              options={menuItem.options}
+              extra={menuItem.extra}
+              item={menuItem}
+            />)
+          }
         </div>
         <div className={css(styles.orderDiv)}>
           <h2>{client} {table}</h2>
-          <ul>
-            {/* <li></li> */}
-          </ul>
+          <p></p>
           <Button className={css(styles.cleanBtn)} title='Limpar pedido' />
-          <Button className={css(styles.sendBtn)} title='Enviar pedido' />
+          <Button className={css(styles.sendBtn)} title='Enviar pedido' onClick={sendOrder} />
         </div>
       </section>
     </main>
-  
+
   );
 }
 
@@ -106,7 +108,7 @@ const styles = StyleSheet.create({
   menuDiv: {
     backgroundColor: '#43210E',
     width: '51vw',
-    height: '32vh',
+    height: '38vh',
     borderRadius: '15px',
     display: 'flex',
     flexWrap: 'wrap',
@@ -116,15 +118,17 @@ const styles = StyleSheet.create({
   },
   btnDiv: {
     display: 'flex',
-    margin: '0 0 0 3vw'
+    margin: '0 0 0 3vw',
+    alignItems: 'center',
   },
   orderDiv: {
     backgroundColor: '#43210E',
+    color: '#D9A273',
+    fontFamily: 'Lato, sans-serif',
     width: '30vw',
-    height: '32vh',
+    height: '38vh',
     borderRadius: '15px',
     padding: '10px',
-
   },
   menuAndorder: {
     display: 'flex',

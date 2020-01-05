@@ -7,15 +7,15 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 function App() {
   return (
     <Router>
-      <Nav/>
+      <Nav />
       <div className="App">
         <Switch>
-          <Route exact path='/'><Restaurant title='Menu'/></Route>
-          <Route path='/cozinha'><Kitchen title='Pedidos'/></Route>
+          <Route exact path='/'><Restaurant title='Menu' /></Route>
+          <Route path='/cozinha'><Kitchen title='Pedidos' /></Route>
         </Switch>
       </div>
     </Router>
-  
+
   );
 }
 
