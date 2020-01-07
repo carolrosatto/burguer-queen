@@ -3,9 +3,10 @@ import { db } from '../utils/firebase';
 import firebase from 'firebase/app';
 import { StyleSheet, css } from 'aphrodite';
 import ItensCard from '../components/itensCard';
-import MealTimeCard from '../components/MealTimeCard'
+import MealTimeCard from '../components/MealTimeCard';
 import Button from '../components/Button';
-import Input from '../components/Input'
+import Input from '../components/Input';
+import { FiXCircle } from "react-icons/fi";
 
 function Restaurant() {
   const [menu, setMenu] = useState([]);
@@ -13,6 +14,7 @@ function Restaurant() {
   const [client, setClient] = useState('');
   const [table, setTable] = useState('');
   const [order, setOrder] = useState([]);
+  const [bill, setBill] = useState(0);
 
   useEffect(() => {
     db.collection('Menu')
@@ -32,7 +34,28 @@ function Restaurant() {
   }
 
   const addProducts = (menuItem) => {
-    setOrder([...order, menuItem]);
+    if (order.includes(menuItem)) {
+      menuItem.count++;
+      setBill(+(bill + menuItem.price * menuItem.count));
+    } else {
+      menuItem.count = 1;
+      setOrder([...order, menuItem]);
+    }
+    setBill(+(bill + menuItem.price));
+  }
+
+  const deleteProducts = (item) => {
+    if (item.count === 1) {
+      const delPrice = bill - item.price;
+      const itemIndex = order.indexOf(item);
+      order.splice(itemIndex, 1);
+      setOrder([...order]);
+      setBill(delPrice);
+    } else {
+      item.count--;
+      const delPrice = bill - item.price;
+      setBill(delPrice);
+    }
   }
 
   const sendOrder = () => {
@@ -41,14 +64,15 @@ function Restaurant() {
         clientName: client,
         tableNumber: table,
         clientOrder: order,
-        // totalBill: total,
-        status: 'Em andamento',
+        totalBill: bill,
+        status: 'Pendente',
         time: firebase.firestore.FieldValue.serverTimestamp()
       })
       .then(() => {
         setOrder([]);
         setTable(['']);
         setClient(['']);
+        setBill(0);
       })
     console.log('Enviado');
   }
@@ -77,24 +101,27 @@ function Restaurant() {
           {filterMeal().map((menuItem) =>
             <ItensCard key={menuItem.id}
               id={menuItem.id}
-              onClick={() => addProducts}
+              onClick={() => addProducts(menuItem)}
               name={menuItem.name}
               price={menuItem.price}
               options={menuItem.options}
               extra={menuItem.extra}
-              item={menuItem}
             />)
           }
         </div>
         <div className={css(styles.orderDiv)}>
           <h2>{client} {table}</h2>
-          <p></p>
-          <Button className={css(styles.cleanBtn)} title='Limpar pedido' />
-          <Button className={css(styles.sendBtn)} title='Enviar pedido' onClick={sendOrder} />
+          <div>
+            {order.map(item =>
+              <p key={item.id}> {item.count}x {item.name} R${item.price} <FiXCircle color='#D95204' onClick={() => deleteProducts(item)} /></p>)}
+            <div><p>Total: R$ {bill} </p></div>
+          </div>
+          <div className={css(styles.sendBtnDiv)}>
+            <Button className={css(styles.sendBtn)} title='Enviar pedido' onClick={(e) => { e.preventDefault(); sendOrder() }} />
+          </div>
         </div>
       </section>
     </main>
-
   );
 }
 
@@ -103,12 +130,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#26140A',
     padding: '10px 0 0 0',
     width: '99vw',
-    height: '50vh',
+    height: '60vh',
   },
   menuDiv: {
     backgroundColor: '#43210E',
     width: '51vw',
-    height: '38vh',
+    height: '43vh',
     borderRadius: '15px',
     display: 'flex',
     flexWrap: 'wrap',
@@ -118,7 +145,7 @@ const styles = StyleSheet.create({
   },
   btnDiv: {
     display: 'flex',
-    margin: '0 0 0 3vw',
+    margin: '0 0 1vh 3vw',
     alignItems: 'center',
   },
   orderDiv: {
@@ -126,7 +153,7 @@ const styles = StyleSheet.create({
     color: '#D9A273',
     fontFamily: 'Lato, sans-serif',
     width: '30vw',
-    height: '38vh',
+    height: '43vh',
     borderRadius: '15px',
     padding: '10px',
   },
@@ -134,27 +161,21 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'space-around',
   },
-  cleanBtn: {
-    width: '14vw',
-    height: '3vh',
-    backgroundColor: '#D95204',
-    borderRadius: '5px',
-    fontFamily: 'Lato, sans-serif',
-    fontSize: '80%',
-    fontWeight: 'bold',
-    border: 'none',
-    margin: '5px'
-  },
   sendBtn: {
-    width: '14vw',
-    height: '3vh',
+    width: '15vw',
+    height: '4vh',
     backgroundColor: '#84BF04',
     borderRadius: '5px',
     fontFamily: 'Lato, sans-serif',
-    fontSize: '80%',
+    fontSize: '90%',
     fontWeight: 'bold',
     border: 'none',
+  },
+  sendBtnDiv: {
+    display: 'flex',
+    justifyContent: 'center'
   }
 })
+
 
 export default Restaurant;

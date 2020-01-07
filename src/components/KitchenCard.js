@@ -12,7 +12,6 @@ function KitchenCard(props) {
 }
 
 const styles = StyleSheet.create({
-
     orderCard: {
       backgroundColor: '#F29F05',
       width: '20vw',

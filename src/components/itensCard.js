@@ -9,7 +9,7 @@ function ItensCard(props) {
       id={props.id}>
       {props.name}<br />
       R$ {props.price},00
-        </section>
+    </section>
   )
 }
 
