@@ -1,0 +1,58 @@
+Primeiro verificar se tem options antes de executar o addProducts, se tiver mostrar e escolher, se nao adiciona direto no pedido;
+menuItem => item que clicamos pra adicionar ao pedido
+
+const [modal, setModal] = useState({status: false});
+const [options, setOptions] = useState('');
+const [extra, setExtra] = useState('');
+
+const verifyOptions = (menuItem) => {
+    if(menuItem.options.length !== 0){
+        setModal({status: true, item:menuItem});
+    } else {
+        addProducts(menuItem);
+    }
+};
+
+const addOptions = () => {
+    const updatedItem = {...modal.item, name: `${modal.item.name} ${options} ${extras}`};
+    addProducts(updatedItem);
+    setModal({status: false})
+}
+
+
+No botao que adiciona o item colocar a função que verifica:
+<MenuCard onClick={verifyOptions}
+
+...
+return (
+    *no lugar que eu quero que printe as options*
+    { modal.status ? (
+        <div>
+            <h3>Extras</h3>
+           { modal.item.extra.map((elem, index) => (
+               <div key={index}> 
+                <input onChange={() => setExtra(elem)} type='radio' name='extra' value={elem} />
+                <label>{elem}</label>
+               </div> 
+            ))}
+            <h3>Opções</h3>
+               { modal.item.options.map((elem, index) => (
+               <div key={index}> 
+                <input onChange={() => setOptions(elem)} type='radio' name='options' value={elem} />
+                <label>{elem}</label>
+               </div> 
+            ))}
+        </div>
+        <button onClick={addOptions}>Adicionar</button>
+    ): false}
+)
+
+
+
+Tentar fazer asssim depois(mas preciso refazer meu componente):
+return (
+    *no lugar que eu quero que printe as options*
+    { modal.status ? (
+        <ExtraMenu />
+    ): false}
+)

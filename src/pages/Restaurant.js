@@ -7,6 +7,7 @@ import MealTimeCard from '../components/MealTimeCard';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import { FiXCircle } from "react-icons/fi";
+// import ExtraMenu from '../components/extraMenu';
 
 function Restaurant() {
   const [menu, setMenu] = useState([]);
@@ -15,6 +16,9 @@ function Restaurant() {
   const [table, setTable] = useState('');
   const [order, setOrder] = useState([]);
   const [bill, setBill] = useState(0);
+  const [modal, setModal] = useState({ status: false });
+  const [options, setOptions] = useState('');
+  const [extra, setExtra] = useState('');
 
   useEffect(() => {
     db.collection('Menu')
@@ -56,6 +60,20 @@ function Restaurant() {
       const delPrice = bill - item.price;
       setBill(delPrice);
     }
+  }
+
+  const verifyOptions = (menuItem) => {
+    if (menuItem.options.length !== 0) {
+      setModal({ status: true, item: menuItem });
+    } else {
+      addProducts(menuItem);
+    }
+  };
+
+  const addOptions = () => {
+    const updatedItem = { ...modal.item, name: `${modal.item.name} ${options} ${extra}` };
+    addProducts(updatedItem);
+    setModal({ status: false })
   }
 
   const sendOrder = () => {
@@ -101,14 +119,37 @@ function Restaurant() {
           {filterMeal().map((menuItem) =>
             <ItensCard key={menuItem.id}
               id={menuItem.id}
-              onClick={() => addProducts(menuItem)}
+              onClick={() => verifyOptions(menuItem)}
               name={menuItem.name}
               price={menuItem.price}
               options={menuItem.options}
               extra={menuItem.extra}
             />)
           }
+          <div>
+            {modal.status ? (
+              <div>
+                <h3>Extras</h3>
+                {modal.item.extra.map((elem, index) => (
+                  <div key={index}>
+                    <input onChange={() => setExtra(elem)} type='radio' name='extra' value={elem.value} />
+                    <label>{elem}</label>
+                  </div>
+                ))}
+
+                <h3>Opções</h3>
+                {modal.item.options.map((elem, index) => (
+                  <div key={index}>
+                    <input onChange={() => setOptions(elem)} type='radio' name='options' value={elem.value} />
+                    <label>{elem}</label>
+                  </div>
+                ))}
+                <button onClick={addOptions}>Adicionar</button>
+              </div>
+            ) : false}
+          </div>
         </div>
+
         <div className={css(styles.orderDiv)}>
           <h2>{client} {table}</h2>
           <div>
@@ -124,6 +165,8 @@ function Restaurant() {
     </main>
   );
 }
+
+// window.addProducts = addProducts;
 
 const styles = StyleSheet.create({
   main: {
@@ -152,6 +195,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#43210E',
     color: '#D9A273',
     fontFamily: 'Lato, sans-serif',
+    fontWeight: 'bold',
     width: '30vw',
     height: '43vh',
     borderRadius: '15px',
