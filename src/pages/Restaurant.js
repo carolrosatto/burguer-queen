@@ -69,9 +69,22 @@ function Restaurant() {
   };
 
   const addOptions = () => {
-    const updatedItem = { ...modal.item, name: `${modal.item.name} ${options} com ${extra}` };
-    addProducts(updatedItem);
-    setModal({ status: false })
+    if (extra !== '') {
+      const updatedItem = {
+        ...modal.item,
+        price: modal.item.price + 1,
+        name: `${modal.item.name} ${options} com ${extra}`
+      };
+      addProducts(updatedItem);
+      setModal({ status: false })
+    } else {
+      const updatedItem = {
+        ...modal.item,
+        name: `${modal.item.name} ${options} com ${extra}`
+      };
+      addProducts(updatedItem);
+      setModal({ status: false })
+    }
   }
 
   const sendOrder = () => {
@@ -84,7 +97,6 @@ function Restaurant() {
           totalBill: bill,
           status: 'Pendente',
           time: new Date().toLocaleString('pt-BR'),
-
         })
         .then(() => {
           setOrder([]);
@@ -141,7 +153,11 @@ function Restaurant() {
                 <h3 className={css(styles.modalTitle)} >Extras</h3>
                 {modal.item.extra.map((extras, index) => (
                   <div className={css(styles.radioText)} key={index} >
-                    <input onChange={() => setExtra(extras)} type='radio' name='extra' value={extras.value} />
+                    <input onChange={() => setExtra(extras)} 
+                    type='radio' 
+                    name='extra' 
+                    value={extras.value} 
+                    checked={extras === extra}/>
                     <label>{extras}</label>
                   </div>
                 ))}</div>
@@ -149,12 +165,16 @@ function Restaurant() {
                 <h3 className={css(styles.modalTitle)}>Opções</h3>
                 {modal.item.options.map((elem, index) => (
                   <div className={css(styles.radioText)} key={index} >
-                    <input onChange={() => setOptions(elem)} type='radio' name='options' value={elem.value} />
+                    <input onChange={() => setOptions(elem)} 
+                    type='radio' 
+                    name='options' 
+                    value={elem.value}
+                    checked={elem === options} />
                     <label>{elem}</label>
                   </div>
                 ))}
-                <Button className={css(styles.addBtn)} onClick={addOptions} title="Adicionar" />
               </div>
+              <Button className={css(styles.addBtn)} onClick={addOptions} title="Adicionar" />
             </section>
           ) : false}
         </div>
@@ -163,8 +183,8 @@ function Restaurant() {
           <h2>{client} {table}</h2>
           <div>
             {order.map(item =>
-              <p key={item.id}> {item.count}x {item.name} R${item.price} <FiXCircle color='#D95204' onClick={() => deleteProducts(item)} /></p>)}
-            <div><p>Total: R$ {bill} </p></div>
+              <p key={item.id}> {item.count}x {item.name} - R$ {item.price},00 <FiXCircle color='#D95204' onClick={() => deleteProducts(item)} /></p>)}
+            <p>{"Total: R$" + bill + ",00"}</p>
           </div>
           <div className={css(styles.sendBtnDiv)}>
             <Button className={css(styles.sendBtn)} title='Enviar pedido' onClick={(e) => { e.preventDefault(); sendOrder() }} />
@@ -210,7 +230,7 @@ const styles = StyleSheet.create({
     width: '30vw',
     height: '43vh',
     borderRadius: '15px',
-    padding: '5px',
+    padding: '10px',
   },
   menuAndorder: {
     display: 'flex',
@@ -236,7 +256,8 @@ const styles = StyleSheet.create({
     height: '15vh',
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'baseline',
+    alignItems: 'initial',
+    justifyContent: 'space-around',
     margin: '20px 0 0 5px',
     borderRadius: '5px'
   },
@@ -244,12 +265,13 @@ const styles = StyleSheet.create({
     color: '#D9A273',
     fontWeight: 'bold',
     fontFamily: 'Lato, sans-serif',
-    fontSize: '115%'
+    fontSize: '115%',
+    margin: '5px'
   },
   optionsDiv: {
     display: 'flex',
     flexDirection: 'column',
-    margin: '5px'
+    margin: '10px',
   },
   addBtn: {
     width: '12vw',
@@ -260,6 +282,7 @@ const styles = StyleSheet.create({
     fontSize: '90%',
     fontWeight: 'bold',
     border: 'none',
+    margin: 'auto'
   },
   radioText: {
     fontFamily: 'Lato, sans-serif',

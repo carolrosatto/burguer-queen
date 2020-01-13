@@ -1,68 +1,100 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Burger Queen
 
-## Available Scripts
+## 1.0 - Resumo
+Um pequeno restaurante de hambúrgueres, que está crescendo, necessita uma interface em que se possa realizar pedidos utilizando um tablet, e enviá-los para a cozinha para que sejam preparados de forma ordenada e eficiente. 
 
-In the project directory, you can run:
+Estas são as informações que temos do cliente:
 
-### `npm start`
+> Somos **Burger Queen**, um fast food 24hrs.
+>
+>A nossa proposta de serviço 24 horas foi muito bem recebida e, para continuar a
+>crescer, precisamos de um sistema que nos ajude a receber pedidos de nossos
+>clientes.
+>
+>Nós temos 2 menus. Um muito simples para o café da manhã:
+>
+>| Ítem                      |Preço R$|
+>|---------------------------|------|
+>| Café americano            |    5 |
+>| Café com leite            |    7 |
+>| Misto Quente              |   10 |
+>| Suco de fruta natural     |    7 |
+>
+>E outro menu para o resto do dia:
+>
+>| Ítem                      |Preço |
+>|---------------------------|------|
+>|**Hambúrgueres**           |   **R$**   |
+>|Hambúrguer simples         |    10|
+>|Hambúrguer duplo           |    15|
+>|**Acompanhamentos**        |   **R$**   |
+>|Batata frita               |     5|
+>|Anéis de cebola            |     5|
+>|**Bebidas**                |   **R$**   |
+>|Água 500ml                 |     5|
+>|Água 750ml                 |     7|
+>|Refrigerante 500ml         |     7|
+>|Refrigerante 750ml         |    10|
+>
+>**Importante:** Os clientes podem escolher entre hambúrgueres de carne bovina,
+>frango ou vegetariano. Além disso, por um adicional de R$ 1,00 , eles podem
+>adicionar queijo ou ovo.
+>
+>Nossos clientes são bastante indecisos, por isso é muito comum que eles mudem o
+>seu pedido várias vezes antes de finalizar.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 2.0 - Definições do produto:
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### Versão 1.0: 
+"*Eu como garçom/garçonete quero poder anotar o meu pedido saber o valor de cada produto e poder enviar o pedido para a cozinha para ser preparado.*"
 
-### `npm test`
+Funcionalidades:
+- Anotar o nome e a mesa;
+- Adicionar produtos aos pedidos;
+- Excluir produtos;
+- Ver resumo e total da compra;
+- Enviar o pedido para a cozinha (armazenar em algum banco de dados);
+- Funcionar bem e se adequar a um tablet.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Versões futuras:
+"*Eu como chefe de cozinha quero ver os pedidos dos clientes em ordem, poder marcar que estão prontos e poder notificar os garçons/garçonetes que o pedido está pronto para ser entregue ao cliente.*"
 
-### `npm run build`
+- Ver os pedidos à medida em que são feitos;
+- Marcar os pedidos que foram preparados e estão prontos para serem servidos;
+- Ver o tempo que levou para preparar o pedido desde que chegou, até ser marcado como concluído.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+"*Eu como garçom/garçonete quero ver os pedidos que estão prontos para entregá-los rapidamente aos clientes.*"
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+- Ver a lista de pedidos prontos para servir;
+- Marque os pedidos que foram entregues.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+"*Eu como funcionário do restaurante quero entrar na plataforma e ver apenas a tela importante para o meu trabalho.*"
+- Criar login e senha;
+- Criar tipo de usuário (cozinha / salão);
+- Entrar na tela correta para cada usuário.
 
-### `npm run eject`
+## 3.0 - Protótipos e layout
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Baseado nas necessidades do cliente, criamos um layout no qual pode-se visualizar todos os itens necessários e acessá-los de forma fácil em um tablet. 
+As cores são relacionadas ao tipo de menu do restaurante e também à funcionalidade do botão (excluir, adicionar, etc).
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Paleta de cores:
+![Paleta de cores](/src/img/paleta.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Protótipo do menu/salão:
+![Layout do menu/salão](/src/img/prototipo1.png)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Protótipo da cozinha:
+![Layout da cozinha](/src/img/prototipo2.png)
 
-## Learn More
+### Layout do produto (versão 1.0):
+![Layout produto](/src/img/layout1.png)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Ferramentas utilizadas:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- JavaScript (ES6);
+- [React Hooks](https://pt-br.reactjs.org/docs/hooks-intro.html);
+- [React Router Dom](https://reacttraining.com/react-router/web/guides/quick-start);
+- [React Icons](https://react-icons.netlify.com/#/);
+- [Aphrodite](https://github.com/Khan/aphrodite);
+- [Firebase](https://firebase.google.com/);
