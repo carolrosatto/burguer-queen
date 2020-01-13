@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../utils/firebase';
-import firebase from 'firebase/app';
 import { StyleSheet, css } from 'aphrodite';
 import ItensCard from '../components/itensCard';
 import MealTimeCard from '../components/MealTimeCard';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import { FiXCircle } from "react-icons/fi";
-// import ExtraMenu from '../components/extraMenu';
 
 function Restaurant() {
   const [menu, setMenu] = useState([]);
@@ -71,28 +69,36 @@ function Restaurant() {
   };
 
   const addOptions = () => {
-    const updatedItem = { ...modal.item, name: `${modal.item.name} ${options} ${extra}` };
+    const updatedItem = { ...modal.item, name: `${modal.item.name} ${options} com ${extra}` };
     addProducts(updatedItem);
     setModal({ status: false })
   }
 
   const sendOrder = () => {
-    db.collection('Order')
-      .add({
-        clientName: client,
-        tableNumber: table,
-        clientOrder: order,
-        totalBill: bill,
-        status: 'Pendente',
-        time: firebase.firestore.FieldValue.serverTimestamp()
-      })
-      .then(() => {
-        setOrder([]);
-        setTable(['']);
-        setClient(['']);
-        setBill(0);
-      })
-    console.log('Enviado');
+    if (order.length && client && table) {
+      db.collection('Order')
+        .add({
+          clientName: client,
+          tableNumber: table,
+          clientOrder: order,
+          totalBill: bill,
+          status: 'Pendente',
+          time: new Date().toLocaleString('pt-BR'),
+
+        })
+        .then(() => {
+          setOrder([]);
+          setTable(['']);
+          setClient(['']);
+          setBill(0);
+        })
+    } else if (!client) {
+      window.alert("Insira o cliente")
+    } else if (!table) {
+      window.alert("Insira a mesa")
+    } else if (!order.length) {
+      window.alert("Insira algo ao pedido")
+    }
   }
 
   return (
@@ -115,39 +121,42 @@ function Restaurant() {
           onChange={event => setTable(event.target.value)} />
       </div>
       <section className={css(styles.menuAndorder)}>
-        <div key={menu.id} className={css(styles.menuDiv)}>
-          {filterMeal().map((menuItem) =>
-            <ItensCard key={menuItem.id}
-              id={menuItem.id}
-              onClick={() => verifyOptions(menuItem)}
-              name={menuItem.name}
-              price={menuItem.price}
-              options={menuItem.options}
-              extra={menuItem.extra}
-            />)
-          }
-          <div>
-            {modal.status ? (
-              <div>
-                <h3>Extras</h3>
-                {modal.item.extra.map((elem, index) => (
-                  <div key={index}>
-                    <input onChange={() => setExtra(elem)} type='radio' name='extra' value={elem.value} />
-                    <label>{elem}</label>
-                  </div>
-                ))}
+        <div className={css(styles.menuDiv)}>
+          <div className={css(styles.itensDiv)}>
+            {filterMeal().map((menuItem, index) =>
+              <ItensCard key={index}
+                id={menuItem.id}
+                onClick={() => verifyOptions(menuItem)}
+                name={menuItem.name}
+                price={menuItem.price}
+                options={menuItem.options}
+                extra={menuItem.extra}
+              />)
+            }
+          </div>
 
-                <h3>Opções</h3>
+          {modal.status ? (
+            <section className={css(styles.modalDiv)}>
+              <div className={css(styles.optionsDiv)}>
+                <h3 className={css(styles.modalTitle)} >Extras</h3>
+                {modal.item.extra.map((extras, index) => (
+                  <div className={css(styles.radioText)} key={index} >
+                    <input onChange={() => setExtra(extras)} type='radio' name='extra' value={extras.value} />
+                    <label>{extras}</label>
+                  </div>
+                ))}</div>
+              <div className={css(styles.optionsDiv)}>
+                <h3 className={css(styles.modalTitle)}>Opções</h3>
                 {modal.item.options.map((elem, index) => (
-                  <div key={index}>
+                  <div className={css(styles.radioText)} key={index} >
                     <input onChange={() => setOptions(elem)} type='radio' name='options' value={elem.value} />
                     <label>{elem}</label>
                   </div>
                 ))}
-                <button onClick={addOptions}>Adicionar</button>
+                <Button className={css(styles.addBtn)} onClick={addOptions} title="Adicionar" />
               </div>
-            ) : false}
-          </div>
+            </section>
+          ) : false}
         </div>
 
         <div className={css(styles.orderDiv)}>
@@ -166,8 +175,6 @@ function Restaurant() {
   );
 }
 
-// window.addProducts = addProducts;
-
 const styles = StyleSheet.create({
   main: {
     backgroundColor: '#26140A',
@@ -180,9 +187,13 @@ const styles = StyleSheet.create({
     width: '51vw',
     height: '43vh',
     borderRadius: '15px',
+    padding: '10px',
+  },
+  itensDiv: {
+    width: '51vw',
+    height: '23vh',
     display: 'flex',
     flexWrap: 'wrap',
-    padding: '10px',
     justifyContent: 'flex-start',
     alignContent: 'flex-start',
   },
@@ -199,7 +210,7 @@ const styles = StyleSheet.create({
     width: '30vw',
     height: '43vh',
     borderRadius: '15px',
-    padding: '10px',
+    padding: '5px',
   },
   menuAndorder: {
     display: 'flex',
@@ -218,6 +229,43 @@ const styles = StyleSheet.create({
   sendBtnDiv: {
     display: 'flex',
     justifyContent: 'center'
+  },
+  modalDiv: {
+    backgroundColor: '#D95204',
+    width: '49vw',
+    height: '15vh',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'baseline',
+    margin: '20px 0 0 5px',
+    borderRadius: '5px'
+  },
+  modalTitle: {
+    color: '#D9A273',
+    fontWeight: 'bold',
+    fontFamily: 'Lato, sans-serif',
+    fontSize: '115%'
+  },
+  optionsDiv: {
+    display: 'flex',
+    flexDirection: 'column',
+    margin: '5px'
+  },
+  addBtn: {
+    width: '12vw',
+    height: '3vh',
+    backgroundColor: '#84BF04',
+    borderRadius: '5px',
+    fontFamily: 'Lato, sans-serif',
+    fontSize: '90%',
+    fontWeight: 'bold',
+    border: 'none',
+  },
+  radioText: {
+    fontFamily: 'Lato, sans-serif',
+    fontWeight: 'bold',
+    fontSize: '100%',
+    margin: '3px'
   }
 })
 
