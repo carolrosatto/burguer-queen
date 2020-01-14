@@ -5,7 +5,6 @@ import * as serviceWorker from './serviceWorker';
 import 'firebase/firestore';
 
 
-
 ReactDOM.render(<App />, document.getElementById('root'));
 
 serviceWorker.unregister();

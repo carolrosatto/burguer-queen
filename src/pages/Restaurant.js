@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
   main: {
     backgroundColor: '#26140A',
     padding: '10px 0 0 0',
-    width: '99vw',
+    width: '100vw',
     height: '60vh',
   },
   menuDiv: {

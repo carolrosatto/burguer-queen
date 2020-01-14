@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   },
   nav: {
     backgroundColor: '#D95204',
-    width: '99vw',
+    width: '100vw',
     height: '5vh',
     display: 'flex',
     justifyContent: 'space-around',
