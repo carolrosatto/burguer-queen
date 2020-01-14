@@ -105,7 +105,7 @@ function Restaurant() {
           setBill(0);
         })
     } else if (!client) {
-      window.alert("Insira o cliente")
+      alert("Insira o cliente")
     } else if (!table) {
       window.alert("Insira a mesa")
     } else if (!order.length) {
