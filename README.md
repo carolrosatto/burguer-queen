@@ -98,3 +98,4 @@ As cores são relacionadas ao tipo de menu do restaurante e também à funcional
 - [React Icons](https://react-icons.netlify.com/#/);
 - [Aphrodite](https://github.com/Khan/aphrodite);
 - [Firebase](https://firebase.google.com/);
+- [Figma](https://www.figma.com);

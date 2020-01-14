@@ -153,11 +153,11 @@ function Restaurant() {
                 <h3 className={css(styles.modalTitle)} >Extras</h3>
                 {modal.item.extra.map((extras, index) => (
                   <div className={css(styles.radioText)} key={index} >
-                    <input onChange={() => setExtra(extras)} 
-                    type='radio' 
-                    name='extra' 
-                    value={extras.value} 
-                    checked={extras === extra}/>
+                    <input onChange={() => setExtra(extras)}
+                      type='radio'
+                      name='extra'
+                      value={extras.value}
+                      checked={extras === extra} />
                     <label>{extras}</label>
                   </div>
                 ))}</div>
@@ -165,11 +165,11 @@ function Restaurant() {
                 <h3 className={css(styles.modalTitle)}>Opções</h3>
                 {modal.item.options.map((elem, index) => (
                   <div className={css(styles.radioText)} key={index} >
-                    <input onChange={() => setOptions(elem)} 
-                    type='radio' 
-                    name='options' 
-                    value={elem.value}
-                    checked={elem === options} />
+                    <input onChange={() => setOptions(elem)}
+                      type='radio'
+                      name='options'
+                      value={elem.value}
+                      checked={elem === options} />
                     <label>{elem}</label>
                   </div>
                 ))}
