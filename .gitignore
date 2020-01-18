@@ -13,9 +13,9 @@
 /utils
 
 # firebase
-firestore.rules
-database.rules.json
-firebase.json
+/firestore.rules
+/database.rules.json
+/firebase.json
 
 # misc
 .DS_Store
