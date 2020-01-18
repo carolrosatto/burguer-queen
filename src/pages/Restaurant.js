@@ -29,12 +29,10 @@ function Restaurant() {
         setMenu(item);
       })
   }, []);
-
   const filterMeal = () => {
     const meal = menu.filter((item) => item.breakfast === breakfast)
     return meal;
   }
-
   const addProducts = (menuItem) => {
     if (order.includes(menuItem)) {
       menuItem.count++;
@@ -45,7 +43,6 @@ function Restaurant() {
     }
     setBill(+(bill + menuItem.price));
   }
-
   const deleteProducts = (item) => {
     if (item.count === 1) {
       const delPrice = bill - item.price;
@@ -59,7 +56,6 @@ function Restaurant() {
       setBill(delPrice);
     }
   }
-
   const verifyOptions = (menuItem) => {
     if (menuItem.options.length !== 0) {
       setModal({ status: true, item: menuItem });
@@ -67,7 +63,6 @@ function Restaurant() {
       addProducts(menuItem);
     }
   };
-
   const addOptions = () => {
     if (extra !== '') {
       const updatedItem = {
@@ -86,7 +81,6 @@ function Restaurant() {
       setModal({ status: false })
     }
   }
-
   const sendOrder = () => {
     if (order.length && client && table) {
       db.collection('Order')
@@ -112,7 +106,6 @@ function Restaurant() {
       window.alert("Insira algo ao pedido")
     }
   }
-
   return (
     <main className={css(styles.main)}>
       <div className={css(styles.btnDiv)}>
@@ -194,24 +187,23 @@ function Restaurant() {
     </main>
   );
 }
-
 const styles = StyleSheet.create({
   main: {
     backgroundColor: '#26140A',
-    padding: '10px 0 0 0',
+    padding: '10px 0 0 0', 
     width: '100vw',
-    height: '60vh',
+    height: '90.5vh',
   },
   menuDiv: {
     backgroundColor: '#43210E',
-    width: '51vw',
-    height: '43vh',
+    width: '55vw',
+    height: '72vh',
     borderRadius: '15px',
     padding: '10px',
   },
   itensDiv: {
-    width: '51vw',
-    height: '23vh',
+    width: '55vw',
+    height: '48vh',
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'flex-start',
@@ -227,10 +219,12 @@ const styles = StyleSheet.create({
     color: '#D9A273',
     fontFamily: 'Lato, sans-serif',
     fontWeight: 'bold',
-    width: '30vw',
-    height: '43vh',
+    fontSize: '140%',
+    width: '32vw',
+    height: '72vh',
     borderRadius: '15px',
     padding: '10px',
+    overflow: 'auto'
   },
   menuAndorder: {
     display: 'flex',
@@ -238,11 +232,11 @@ const styles = StyleSheet.create({
   },
   sendBtn: {
     width: '15vw',
-    height: '4vh',
+    height: '6vh',
     backgroundColor: '#84BF04',
     borderRadius: '5px',
     fontFamily: 'Lato, sans-serif',
-    fontSize: '90%',
+    fontSize: '80%',
     fontWeight: 'bold',
     border: 'none',
   },
@@ -252,34 +246,33 @@ const styles = StyleSheet.create({
   },
   modalDiv: {
     backgroundColor: '#D95204',
-    width: '49vw',
-    height: '15vh',
+    width: '55vw',
+    height: '23vh',
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'initial',
     justifyContent: 'space-around',
-    margin: '20px 0 0 5px',
     borderRadius: '5px'
   },
   modalTitle: {
     color: '#D9A273',
     fontWeight: 'bold',
     fontFamily: 'Lato, sans-serif',
-    fontSize: '115%',
-    margin: '5px'
+    fontSize: '150%',
+    margin: '10px'
   },
   optionsDiv: {
     display: 'flex',
     flexDirection: 'column',
-    margin: '10px',
+    margin: '15px',
   },
   addBtn: {
-    width: '12vw',
-    height: '3vh',
+    width: '14vw',
+    height: '6vh',
     backgroundColor: '#84BF04',
     borderRadius: '5px',
     fontFamily: 'Lato, sans-serif',
-    fontSize: '90%',
+    fontSize: '120%',
     fontWeight: 'bold',
     border: 'none',
     margin: 'auto'
@@ -287,8 +280,8 @@ const styles = StyleSheet.create({
   radioText: {
     fontFamily: 'Lato, sans-serif',
     fontWeight: 'bold',
-    fontSize: '100%',
-    margin: '3px'
+    fontSize: '120%',
+    margin: '5px'
   }
 })
 

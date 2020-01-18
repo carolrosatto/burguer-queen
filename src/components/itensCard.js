@@ -7,27 +7,29 @@ function ItensCard(props) {
       onClick={props.onClick}
       className={css(styles.menuCard)}
       id={props.id}>
-      {props.name}<br />
-      R$ {props.price},00
+      <p className={css(styles.itemParag)}>{props.name}</p>
+      <p className={css(styles.itemParag)}>R$ {props.price},00</p>
     </section>
   )
 }
-
 const styles = StyleSheet.create({
-
   menuCard: {
     backgroundColor: '#F29F05',
-    width: '13vw',
-    height: '5vh',
+    width: '14vw',
+    height: '10vh',
     borderRadius: '5px',
     fontFamily: 'Lato, sans-serif',
-    fontSize: '90%',
+    fontSize: '120%',
     display: 'flex',
     fontWeight: 'bold',
+    flexDirection: 'column',
     padding: '10px',
-    margin: '5px',
+    margin: '10px',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-start',
+  },
+  itemParag: {
+    margin: '0',
   }
 })
 

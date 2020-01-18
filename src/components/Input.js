@@ -8,16 +8,17 @@ function Input(props) {
       type={props.type}
       value={props.value}
       onChange={props.onChange}
-      placeholder={props.placeholder} />
+      placeholder={props.placeholder}
+    />
   )
 }
-
 const styles = StyleSheet.create({
   input: {
-    height: '2vh',
+    height: '4vh',
     width: '15vw',
     margin: '5px',
-    borderRadius: '5px'
+    borderRadius: '5px',
+    fontSize: '110%'
   }
 })
 

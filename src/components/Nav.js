@@ -14,32 +14,31 @@ function Nav() {
     </section>
   )
 }
-
 const styles = StyleSheet.create({
   logo: {
-    width: '210px',
-    height: '50px',
+    width: '25vw',
   },
   nav: {
     backgroundColor: '#D95204',
     width: '100vw',
-    height: '5vh',
+    height: '8vh',
     display: 'flex',
     justifyContent: 'space-around',
-    alignItems: 'center'
+    alignItems: 'center',
+    position: 'static'
   },
   navbtn: {
     backgroundColor: '#84BF04',
     borderRadius: '5px',
-    width: '9vw',
-    height: '2vh',
+    width: '11vw',
+    height: '4vh',
     padding: '5px',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     textDecoration: 'none',
     fontFamily: 'Lato, sans-serif',
-    fontSize: '90%',
+    fontSize: '110%',
     color: '#000000',
     fontWeight: 'bold'
   }

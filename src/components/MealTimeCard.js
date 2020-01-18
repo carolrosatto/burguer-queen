@@ -11,22 +11,21 @@ function MealTimeCard(props) {
     </section>
   )
 }
-
 const styles = StyleSheet.create({
   optioncard: {
     backgroundColor: '#D9A273',
-    width: '110px',
-    height: '30px',
+    width: '15vw',
+    height: '6vh',
     borderRadius: '5px',
     color: '#D95204',
     fontFamily: 'Lato, sans-serif',
-    fontSize: '90%',
+    fontSize: '120%',
     fontWeight: 'bold',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     padding: '5px',
-    margin: '5px'
+    margin: '8px'
   }
 });
 

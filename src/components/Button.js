@@ -7,7 +7,6 @@ function Button(props) {
       className={props.className}
       component={props.component}>
       {props.title}
-
     </button>
   )
 }
