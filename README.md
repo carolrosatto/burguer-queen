@@ -77,6 +77,7 @@ Funcionalidades:
 
 Baseado nas necessidades do cliente, criamos um layout no qual pode-se visualizar todos os itens necessários e acessá-los de forma fácil em um tablet. 
 As cores são relacionadas ao tipo de menu do restaurante e também à funcionalidade do botão (excluir, adicionar, etc).
+OBS: Projetado para tablets (1024 x 768)
 
 ### Paleta de cores:
 ![Paleta de cores](/src/img/paleta.png)
@@ -90,7 +91,7 @@ As cores são relacionadas ao tipo de menu do restaurante e também à funcional
 ### Layout do produto (versão 1.0):
 ![Layout produto](/src/img/layout1.png)
 
-## Ferramentas utilizadas:
+## 4.0 Ferramentas utilizadas:
 
 - JavaScript (ES6);
 - [React Hooks](https://pt-br.reactjs.org/docs/hooks-intro.html);

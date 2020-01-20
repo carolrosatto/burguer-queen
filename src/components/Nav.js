@@ -10,6 +10,7 @@ function Nav() {
         <img src={logo} alt='Logo Burger Queen' className={css(styles.logo)} />
         <Link className={css(styles.navbtn)} to='/'>Salão</Link>
         <Link className={css(styles.navbtn)} to='/cozinha'>Cozinha</Link>
+        <Link className={css(styles.navbtn)} to='/entrega'>Entrega</Link>
       </nav>
     </section>
   )
