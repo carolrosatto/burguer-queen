@@ -7,11 +7,11 @@ function KitchenCard(props) {
     <div
       className={css(styles.orderCard)}>
       <section className={css(styles.orderText)}>
-        <p>{props.clientName}, Mesa: {props.tableNumber}</p>
+        <p><strong>{props.clientName}, Mesa: {props.tableNumber}</strong></p>
         <div>{props.clientOrder}</div>
         <p><strong>Status: {props.status}</strong></p>
         <p>{props.time}</p>
-        <div className={css(styles.readyBtnDiv)}><Button className={css(styles.readyBtn)} title="Pronto!"/></div>
+        <div className={css(styles.readyBtnDiv)}><Button onClick={props.onClick} className={css(styles.readyBtn)} title="Pronto!"/></div>
       </section>
     </div>
   )

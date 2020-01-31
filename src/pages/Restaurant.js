@@ -90,7 +90,8 @@ function Restaurant() {
           clientOrder: order,
           totalBill: bill,
           status: 'Pendente',
-          time: new Date().toLocaleString('pt-BR'),
+          startTime: new Date().toLocaleString('pt-BR'),
+          finishTime: ""
         })
         .then(() => {
           setOrder([]);
