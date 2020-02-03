@@ -11,12 +11,7 @@
 # production
 /build
 src/utils
-
-# firebase
-firebase.json
-database.rules.json
-firestore.indexes.json
-firestore.rules
+/.firebase
 
 # misc
 .DS_Store
