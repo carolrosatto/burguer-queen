@@ -9,9 +9,9 @@ function DeliverCard(props) {
       <section className={css(styles.deliverText)}>
         <p><strong>{props.clientName}, Mesa: {props.tableNumber}</strong></p>
         <div>{props.clientOrder}</div>
-        {/* <p><strong>Status: {props.status}</strong></p> */}
-        {/* <p>{props.time}</p> */}
-        <div className={css(styles.deliverBtnDiv)}><Button onClick={props.onClick} className={css(styles.deliverBtn)} title="Servir"/></div>
+        <p><strong>Status: {props.status}</strong></p>
+        <p>{props.time}</p>
+        <div className={css(styles.deliverBtnDiv)}><Button onClick={props.onClick} className={css(styles.deliverBtn)} title="Entregar"/></div>
       </section>
     </div>
   )
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   deliverCard: {
     backgroundColor: '#F29F05',
     width: '20vw',
-    height: '25vh',
+    height: '35vh',
     fontFamily: 'Lato, sans-serif',
     fontSize: '100%',
     display: 'flex',
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     margin: '25px 3px 3px 25px',
     justifyContent: 'flex-start',
     flexDirection: 'column',
-    overflow: 'scroll'
+    overflow: 'auto'
   },
   deliverText: {
     padding: '5px',
@@ -42,6 +42,13 @@ const styles = StyleSheet.create({
     fontSize: '120%',
     fontWeight: 'bold',
     border: 'none',
+    ':hover': {
+      backgroundColor: '#D9A273',
+      cursor: 'pointer'
+    },
+    ':active':{
+      backgroundColor: '#D95204'
+    }
   },
   deliverBtnDiv: {
     display: 'flex',

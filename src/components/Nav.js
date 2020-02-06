@@ -17,7 +17,7 @@ function Nav() {
 }
 const styles = StyleSheet.create({
   logo: {
-    width: '25vw',
+    height: '8vh'
   },
   nav: {
     backgroundColor: '#D95204',
@@ -41,7 +41,14 @@ const styles = StyleSheet.create({
     fontFamily: 'Lato, sans-serif',
     fontSize: '110%',
     color: '#000000',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    ':hover': {
+      backgroundColor: '#D9A273',
+      cursor: 'pointer'
+    },
+    ':active':{
+      backgroundColor: '#84BF04'
+    }
   }
 })
 

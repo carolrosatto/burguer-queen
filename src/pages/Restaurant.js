@@ -68,14 +68,14 @@ function Restaurant() {
       const updatedItem = {
         ...modal.item,
         price: modal.item.price + 1,
-        name: `${modal.item.name} ${options} com ${extra}`
+        name: `${modal.item.name} ${options} ${extra}`
       };
       addProducts(updatedItem);
       setModal({ status: false })
     } else {
       const updatedItem = {
         ...modal.item,
-        name: `${modal.item.name} ${options} com ${extra}`
+        name: `${modal.item.name} ${options} ${extra}`
       };
       addProducts(updatedItem);
       setModal({ status: false })
@@ -95,9 +95,9 @@ function Restaurant() {
         })
         .then(() => {
           setOrder([]);
-          setTable(['']);
-          setClient(['']);
           setBill(0);
+          setClient('');
+          setTable('');
         })
     } else if (!client) {
       alert("Insira o cliente")
@@ -119,10 +119,12 @@ function Restaurant() {
           onClick={() => setBreakfast(false)} />
         <Input
           type='text'
+          value={client}
           placeholder='Nome do cliente'
           onChange={event => setClient(event.target.value)} />
         <Input
           type='number'
+          value={table}
           placeholder='Mesa'
           onChange={event => setTable(event.target.value)} />
       </div>
@@ -144,18 +146,6 @@ function Restaurant() {
           {modal.status ? (
             <section className={css(styles.modalDiv)}>
               <div className={css(styles.optionsDiv)}>
-                <h3 className={css(styles.modalTitle)} >Extras</h3>
-                {modal.item.extra.map((extras, index) => (
-                  <div className={css(styles.radioText)} key={index} >
-                    <input onChange={() => setExtra(extras)}
-                      type='radio'
-                      name='extra'
-                      value={extras.value}
-                      checked={extras === extra} />
-                    <label>{extras}</label>
-                  </div>
-                ))}</div>
-              <div className={css(styles.optionsDiv)}>
                 <h3 className={css(styles.modalTitle)}>Opções</h3>
                 {modal.item.options.map((elem, index) => (
                   <div className={css(styles.radioText)} key={index} >
@@ -168,6 +158,18 @@ function Restaurant() {
                   </div>
                 ))}
               </div>
+              <div className={css(styles.optionsDiv)}>
+                <h3 className={css(styles.modalTitle)} >Extras</h3>
+                {modal.item.extra.map((extras, index) => (
+                  <div className={css(styles.radioText)} key={index} >
+                    <input onChange={() => setExtra(extras)}
+                      type='radio'
+                      name='extra'
+                      value={extras.value}
+                      checked={extras === extra} />
+                    <label>{extras}</label>
+                  </div>
+                ))}</div>
               <Button className={css(styles.addBtn)} onClick={addOptions} title="Adicionar" />
             </section>
           ) : false}
@@ -191,7 +193,7 @@ function Restaurant() {
 const styles = StyleSheet.create({
   main: {
     backgroundColor: '#26140A',
-    padding: '10px 0 0 0', 
+    padding: '10px 0 0 0',
     width: '100vw',
     height: '90.5vh',
   },
@@ -240,6 +242,13 @@ const styles = StyleSheet.create({
     fontSize: '80%',
     fontWeight: 'bold',
     border: 'none',
+    ':hover': {
+      backgroundColor: '#D9A273',
+      cursor: 'pointer'
+    },
+    ':active': {
+      backgroundColor: '#84BF04'
+    }
   },
   sendBtnDiv: {
     display: 'flex',
@@ -253,14 +262,26 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'initial',
     justifyContent: 'space-around',
-    borderRadius: '5px'
+    borderRadius: '5px',
+    '@media (min-width: 1025px)':
+    {
+      width: '40vw',
+      height: '20vh',
+      margin: 'auto',
+      marginTop: '15px'
+    }
   },
   modalTitle: {
     color: '#D9A273',
     fontWeight: 'bold',
     fontFamily: 'Lato, sans-serif',
     fontSize: '150%',
-    margin: '10px'
+    margin: '10px',
+    '@media (min-width: 1025px)':
+    {
+      fontSize: '130%',
+      margin: '2px'
+    }
   },
   optionsDiv: {
     display: 'flex',
@@ -276,13 +297,29 @@ const styles = StyleSheet.create({
     fontSize: '120%',
     fontWeight: 'bold',
     border: 'none',
-    margin: 'auto'
+    margin: 'auto',
+    ':hover': {
+      backgroundColor: '#D9A273',
+      cursor: 'pointer'
+    },
+    ':active': {
+      backgroundColor: '#84BF04'
+    },
+    '@media (min-width: 1025px)':
+    {
+      width: '10vw'
+    }
   },
   radioText: {
     fontFamily: 'Lato, sans-serif',
     fontWeight: 'bold',
     fontSize: '120%',
-    margin: '5px'
+    margin: '5px',
+    '@media (min-width: 1025px)':
+    {
+      fontSize: '100%',
+      margin: '3px'
+    }
   }
 })
 

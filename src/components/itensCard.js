@@ -27,6 +27,13 @@ const styles = StyleSheet.create({
     margin: '10px',
     justifyContent: 'center',
     alignItems: 'flex-start',
+    ':hover': {
+      backgroundColor: '#D9A273',
+      cursor: 'pointer'
+    },
+    ':active':{
+      backgroundColor: '#F29F05'
+    }
   },
   itemParag: {
     margin: '0',

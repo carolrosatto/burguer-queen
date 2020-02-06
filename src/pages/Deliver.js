@@ -17,29 +17,36 @@ function Deliver() {
       });
   }, []);
 
+  const deliverOrder = (id) => {
+    db.collection("Order")
+      .doc(id)
+      .update({
+        status: "Entregue"
+      })
+  }
+
   return (
     <main className={css(styles.mainDeliver)}>
-    <div>
-      <div className={css(styles.pendentDeliverDiv)}>
-        <h2 className={css(styles.deliverTitle)}>Pronto para entrega</h2>
-        {finishedOrders
-          .filter(item => item.status === "Finalizado")
-          .map((ord) =>
-            <DeliverCard key={ord.id}
-              clientName={ord.clientName}
-              tableNumber={ord.tableNumber}
-              // time={ord.startTime}
-              // onClick={()=> getFinishTime(ord.id)}
-              status={ord.status}
-              clientOrder={ord.clientOrder.map((item, index) => (
-                <div key={index}>
-                  {item.count}x {item.name}
-                </div>
-              ))}
-            />)}
+      <div>
+        <div className={css(styles.pendentDeliverDiv)}>
+          {finishedOrders
+            .filter(item => item.status === "Finalizado")
+            .map((ord) =>
+              <DeliverCard key={ord.id}
+                clientName={ord.clientName}
+                tableNumber={ord.tableNumber}
+                time={ord.startTime}
+                onClick={() => deliverOrder(ord.id)}
+                status={ord.status}
+                clientOrder={ord.clientOrder.map((item, index) => (
+                  <div key={index}>
+                    {item.count}x {item.name}
+                  </div>
+                ))}
+              />)}
+        </div>
       </div>
-    </div>
-  </main>
+    </main>
   );
 }
 
@@ -49,6 +56,10 @@ const styles = StyleSheet.create({
     padding: '10px 0 0 0',
     width: '100vw',
     height: '90.5vh',
+  },
+  pendentDeliverDiv: {
+    display: 'flex',
+    flexWrap: 'wrap'
   },
   deliverTitle: {
     color: '#D9A273',

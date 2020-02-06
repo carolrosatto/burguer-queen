@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   orderCard: {
     backgroundColor: '#F29F05',
     width: '20vw',
-    height: '30vh',
+    height: '35vh',
     fontFamily: 'Lato, sans-serif',
     fontSize: '100%',
     display: 'flex',
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     margin: '25px 3px 3px 25px',
     justifyContent: 'flex-start',
     flexDirection: 'column',
-    overflow: 'scroll'
+    overflow: 'auto'
   },
   orderText: {
     padding: '5px',
@@ -42,6 +42,13 @@ const styles = StyleSheet.create({
     fontSize: '110%',
     fontWeight: 'bold',
     border: 'none',
+    ':hover': {
+      backgroundColor: '#D9A273',
+      cursor: 'pointer'
+    },
+    ':active':{
+      backgroundColor: '#84BF04'
+    }
   },
   readyBtnDiv: {
     display: 'flex',

@@ -25,7 +25,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: '5px',
-    margin: '8px'
+    margin: '8px',
+    ':hover': {
+      backgroundColor: '#84BF04',
+      cursor: 'pointer'
+    },
+    ':active':{
+      backgroundColor: '#D9A273'
+    }
   }
 });
 
